@@ -20,11 +20,6 @@ public class KullaniciKaydiStepDef {
     String email1 = faker.internet().emailAddress();
     Actions actions = new Actions(Driver.getDriver());
 
-    public static void main(String[] args) {
-        Faker faker = new Faker();
-        String as = faker.address().zipCode();
-        System.out.println(as);
-    }
 
 
     @Given("Kullanici {string} sayfasina gider.")
