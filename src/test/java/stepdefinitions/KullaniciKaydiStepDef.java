@@ -10,28 +10,31 @@ import pages.KullaniciKaydiPage;
 import utilities.ConfigReader;
 import utilities.Driver;
 
+import static utilities.Driver.waitFor;
+
 public class KullaniciKaydiStepDef {
 
 
     KullaniciKaydiPage kullaniciKaydiPage = new KullaniciKaydiPage();
     Faker faker = new Faker();
-    String email1 =faker.internet().emailAddress();
+    String email1 = faker.internet().emailAddress();
     Actions actions = new Actions(Driver.getDriver());
+
     public static void main(String[] args) {
         Faker faker = new Faker();
-        String as= faker.address().zipCode();
+        String as = faker.address().zipCode();
         System.out.println(as);
     }
 
 
     @Given("Kullanici {string} sayfasina gider.")
     public void kullanici_automation_practise_sayfasina_gider(String webSite) {
-        Driver.getDriver().get(ConfigReader.getProperty("webSite"));
+        Driver.getDriver().get(ConfigReader.getProperty(webSite));
     }
 
     @Given("Kullanici istenen sayfasinin acildigini assert eder.")
-    public void kullanici_istenen_sayfasinin_acildigini_assert_eder() throws InterruptedException {
-        Thread.sleep(5000);
+    public void kullanici_istenen_sayfasinin_acildigini_assert_eder() {
+        waitFor(5);
         Assert.assertTrue(kullaniciKaydiPage.signInButton.isDisplayed());
     }
 
@@ -41,9 +44,9 @@ public class KullaniciKaydiStepDef {
     }
 
     @Given("Kullanici valid email adresi girer.")
-    public void kullanici_valid_email_adresi_girer() throws InterruptedException {
+    public void kullanici_valid_email_adresi_girer() {
         kullaniciKaydiPage.emailCreate.sendKeys(email1);
-        Thread.sleep(5000);
+        waitFor(5);
     }
 
     @Given("Kullanici Create Account secenegine tiklar.")
@@ -59,20 +62,20 @@ public class KullaniciKaydiStepDef {
 
     @Given("Kullanici valid First Name girer.")
     public void kullanici_valid_first_name_girer() {
-        String name=faker.name().firstName();
+        String name = faker.name().firstName();
         kullaniciKaydiPage.firstName.sendKeys(name);
     }
 
     @Given("Kullanici valid Last Name girer.")
     public void kullanici_valid_last_name_girer() {
-        String lastName=faker.name().lastName();
+        String lastName = faker.name().lastName();
         kullaniciKaydiPage.lastName.sendKeys(lastName);
     }
 
     @Given("Kullanici valid email degeri girer.")
-    public void kullanici_valid_email_degeri_girer() throws InterruptedException {
+    public void kullanici_valid_email_degeri_girer() {
         kullaniciKaydiPage.email.sendKeys(email1);
-        Thread.sleep(3000);
+        waitFor(5);
     }
 
     @Given("Kullanici valid minimum bes karakterli password girer.")
@@ -95,10 +98,6 @@ public class KullaniciKaydiStepDef {
 
     }
 
-    @Given("Kullanici Company text buttona valid deger girer.")
-    public void kullanici_company_text_buttona_valid_deger_girer() {
-
-    }
 
     @Given("Kullanici Adress kismina valid deger girer.")
     public void kullanici_adress_kismina_valid_deger_girer() {
@@ -118,15 +117,11 @@ public class KullaniciKaydiStepDef {
     }
 
     @Given("Kullanici Zip Postal Code degeri girer.")
-    public void kullanici_zip_postal_code_degeri_girer() throws InterruptedException {
-        Thread.sleep(3000);
+    public void kullanici_zip_postal_code_degeri_girer() {
+        waitFor(5);
         kullaniciKaydiPage.postcode.sendKeys("15963");
     }
 
-    @Given("Kullanici Country secer.")
-    public void kullanici_country_secer() {
-        //secili
-    }
 
     @Given("Kullanici Mobile phone degeri girer.")
     public void kullanici_mobile_phone_degeri_girer() {

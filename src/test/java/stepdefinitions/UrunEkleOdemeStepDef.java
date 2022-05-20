@@ -7,6 +7,8 @@ import org.openqa.selenium.interactions.Actions;
 import pages.UrunEkleOdemePage;
 import utilities.Driver;
 
+import static utilities.Driver.waitFor;
+
 public class UrunEkleOdemeStepDef {
 
     UrunEkleOdemePage urunEkleOdemePage = new UrunEkleOdemePage();
@@ -18,33 +20,33 @@ public class UrunEkleOdemeStepDef {
     }
 
     @Then("Kullanici acilan pencerede Summer Dresses butonuna tiklar.")
-    public void kullanici_acilan_pencerede_summer_dresses_butonuna_tiklar() throws InterruptedException {
-        Thread.sleep(4000);
+    public void kullanici_acilan_pencerede_summer_dresses_butonuna_tiklar() {
+        waitFor(5);
         urunEkleOdemePage.summerDressesButton.click();
 
     }
 
     @Then("Kullanici dresseslerden bir tanesini sepete ekler.")
-    public void kullanici_dresseslerden_bir_tanesini_sepete_ekler() throws InterruptedException {
+    public void kullanici_dresseslerden_bir_tanesini_sepete_ekler() {
         actions.moveToElement(urunEkleOdemePage.dress1).perform();
         urunEkleOdemePage.addDress.click();
-        Thread.sleep(3000);
+        waitFor(5);
         urunEkleOdemePage.closeWindovButton.click();
     }
 
     @Then("Kullanici arama butonuna Summer yazarak search eder.")
-    public void kullanici_arama_butonuna_summer_yazarak_search_eder() throws InterruptedException {
+    public void kullanici_arama_butonuna_summer_yazarak_search_eder() {
         urunEkleOdemePage.searchButton.sendKeys("Summer" + Keys.ENTER);
-        Thread.sleep(5000);
+        waitFor(5);
     }
 
     @Then("Kullanici sonuc sayfasindan bir urun daha ekler.")
-    public void kullanici_sonuc_sayfasindan_bir_urun_daha_ekler() throws InterruptedException {
+    public void kullanici_sonuc_sayfasindan_bir_urun_daha_ekler() {
 
         actions.moveToElement(urunEkleOdemePage.dress2).perform();
-        Thread.sleep(2000);
+        waitFor(5);
         actions.click(urunEkleOdemePage.addDress2).perform();
-        Thread.sleep(2000);
+        waitFor(5);
         urunEkleOdemePage.closeWindovButton.click();
     }
 
@@ -69,20 +71,25 @@ public class UrunEkleOdemeStepDef {
 
     @Then("Kullanici Protected to checkout secenegine tiklar.")
     public void kullanici_protected_to_checkout_secenegine_tiklar() {
-        urunEkleOdemePage.protectedToCheckoutButton.click();
+        urunEkleOdemePage.summmaryProtectedToCheckoutButton.click();
     }
 
     @Then("Kullanici adres secili oldugunu dogrular ve yeniden Proceed to checkout buttona tiklar.")
     public void kullanici_adres_secili_oldugunu_dogrular_ve_yeniden_proceed_to_checkout_buttona_tiklar() {
+        actions.sendKeys(Keys.PAGE_DOWN).
+                moveToElement(urunEkleOdemePage.adressYeriBulma).perform();
         Assert.assertTrue(urunEkleOdemePage.adress.getText().contains("15963"));
-        actions.moveToElement(urunEkleOdemePage.protectedToCheckoutButton).perform();
-        urunEkleOdemePage.protectedToCheckoutButton.click();
+        actions.sendKeys(Keys.PAGE_DOWN).moveToElement(urunEkleOdemePage.adressSayfasiProtected).perform();
+        urunEkleOdemePage.adressSayfasiProtected.click();
+
     }
 
     @Then("Kullanici hizmet sartlarini kabul eder ve Proceed to checkout buttona tiklar.")
     public void kullanici_hizmet_sartlarini_kabul_eder_ve_proceed_to_checkout_buttona_tiklar() {
+        actions.moveToElement(urunEkleOdemePage.hizmetSartiKabulu).perform();
         urunEkleOdemePage.hizmetSartiKabulu.click();
-        urunEkleOdemePage.protectedToCheckoutButton.click();
+        actions.moveToElement(urunEkleOdemePage.protectedToCheckoutButton).click().perform();
+
     }
 
     @Then("Kullanici acilan payment sayfasinda herhangi bir odeme secenegini isaretler.")

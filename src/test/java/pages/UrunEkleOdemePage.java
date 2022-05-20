@@ -39,22 +39,33 @@ public class UrunEkleOdemePage extends BasePage {
     @FindBy(xpath = "(//span[@class='price'])[7]")
     public WebElement secondDressTotal;
 
-    @FindBy(xpath = "//a[@class='button btn btn-default standard-checkout button-medium']")
+    @FindBy(xpath = "//button[@class='button btn btn-default standard-checkout button-medium']")
     public WebElement protectedToCheckoutButton;
 
-    @FindBy(xpath ="//span[@title='Close window']")
+    @FindBy(xpath = "//a[@class='button btn btn-default standard-checkout button-medium']")
+    public WebElement summmaryProtectedToCheckoutButton;
+
+
+
+    @FindBy(xpath = "//button[@class='button btn btn-default button-medium']")
+    public WebElement adressSayfasiProtected;
+
+    @FindBy(xpath = "//span[@title='Close window']")
     public WebElement closeWindovButton;
 
 //    @FindBy(xpath ="//span[@title='View my shopping cart']")
 //    public WebElement cartButton;
 
-    @FindBy(xpath ="(//i[@class='icon-chevron-right right'])[1]")
+    @FindBy(xpath = "(//i[@class='icon-chevron-right right'])[1]")
     public WebElement checkoutButton;
 
     @FindBy(xpath = "(//span[@class='ajax_cart_quantity'])[1]")
     public WebElement sepettekiUrunSayisi;
 
-    @FindBy(xpath = " (//li[@class='address_city address_state_name address_postcode'])[1]")
+    @FindBy(xpath = "//*[text()='Your delivery address']")
+    public WebElement adressYeriBulma;
+
+    @FindBy(xpath = "//li[@class='address_city address_state_name address_postcode']")
     public WebElement adress;
 
     @FindBy(id = "cgv")
@@ -71,13 +82,6 @@ public class UrunEkleOdemePage extends BasePage {
 
     @FindBy(xpath = "(//a[@class='btn btn-default button button-small'])[2]")
     public WebElement siparisDetails;
-
-
-
-
-
-
-
 
 
 }
